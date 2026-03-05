@@ -7,9 +7,13 @@ LLR determines the Learning Rate parameter values of each layer in LLM training 
 <div align="center">
   <img src="./images/fig1.png" alt="Image 2" style="width: 800px; margin: 0 auto;">
   <img src="./images/fig2.png" alt="Image 2" style="width: 800px; margin: 0 auto;">
-  <img src="./images/fig3.png" alt="Image 2" style="width: 800px; margin: 0 auto;">
 </div>
 
+LLR consistently outperforms Uniform at equivalent token counts and attains comparable performance with approximately 1.5× fewer tokens, highlighting its effectiveness in accelerating convergence.
+
+<div align="center">
+  <img src="./images/fig3.png" alt="Image 2" style="width: 800px; margin: 0 auto;">
+</div>
 
 ## Table of contents
 
