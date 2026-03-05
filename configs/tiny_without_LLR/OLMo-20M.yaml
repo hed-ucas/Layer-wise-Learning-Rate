@@ -1,0 +1,141 @@
+run_name: OLMo-20M
+seed: 6198
+dry_run: false
+
+swanlab:
+  name: ${run_name}
+  project: olmo-tiny
+
+model:
+  d_model: 256
+  n_heads: 8
+  n_layers: 8
+  mlp_ratio: 8
+  weight_tying: false
+  alibi: false
+  rope: true
+  flash_attention: true
+  attention_dropout: 0.0
+  attention_layer_norm: false
+  clip_qkv: null
+  include_bias: false
+  block_type: sequential
+  layer_norm_type: rms
+  layer_norm_with_affine: true
+  layer_norm_eps: 1e-6
+  bias_for_layer_norm: false
+  attention_layer_norm_with_affine: false
+  activation_type: swiglu
+  residual_dropout: 0.0
+  embedding_dropout: 0.0
+  max_sequence_length: 256
+  vocab_size: 50280
+  embedding_size: 50304
+  eos_token_id: 0
+  pad_token_id: 1
+  init_device: cuda
+  init_fn: normal
+  init_std: 0.02
+  init_cutoff_factor: 3
+
+ddp:
+  grad_sync_mode: batch
+  find_unused_params: false
+
+compile: null
+
+optimizer:
+  name: adamw
+  learning_rate: 6.0e-4
+  weight_decay: 0.1
+  eps: 1e-8
+  decay_norm_and_bias: true
+  decay_embeddings: true
+  betas:
+  - 0.9
+  - 0.95
+  metrics_log_interval: 10
+
+scheduler:
+  name: cosine_with_warmup
+  t_warmup: 5000
+  alpha_f: 0.1
+  warmup_min_lr: 0
+
+tokenizer:
+  identifier: tokenizers/allenai_gpt-neox-olmo-dolma-v1_5.json
+  truncate_direction: right
+
+save_folder: workspace/${run_name}  # doesn't matter since we'll upload to S3
+remote_save_folder:
+save_overwrite: True
+
+# Unsharded checkpoints (for ddp)
+save_interval_unsharded: 5000
+save_num_unsharded_checkpoints_to_keep: -1
+
+load_path: null
+
+max_duration: 1ep
+stop_at: 20_000
+global_train_batch_size: 512
+device_train_microbatch_size: 256
+
+precision: amp_bf16
+distributed_strategy: ddp
+
+gen1_gc_interval: 1
+
+max_grad_norm: 1.0
+max_grad_norm_ratio: null
+
+speed_monitor:
+  window_size: 20
+
+eval_interval: 5000
+eval_subset_num_batches: -1
+device_eval_batch_size: ${device_train_microbatch_size}
+evaluators:
+  - label: all-small-ppl-validation
+    data:
+      num_workers: 0
+      drop_last: true
+      datasets:
+        c4_en-validation:
+          - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/val/c4/part-0-00000.npy
+
+data:
+  pad_direction: right
+  num_workers: 32
+  drop_last: true
+  pin_memory: true
+  prefetch_factor: 8
+  persistent_workers: true
+  timeout: 0
+  instance_filter:
+    repetition_max_period: 13
+    repetition_min_period: 1
+    repetition_max_count: 32
+  paths:
+    # ~> C4 (138.4 GT)
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-000-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-001-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-002-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-003-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-004-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-005-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-006-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-007-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-008-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-009-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-010-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-011-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-012-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-013-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-014-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-015-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-016-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-017-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-018-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-019-00000.npy
+    - /mnt/parallel_ssd/c4/olmo-mix/v1_6-decontaminated/c4/v1_7-dd_ngram_dp_030-qc_cc_en_bin_001-fix/gpt-neox-olmo-dolma-v1_5/part-020-00000.npy

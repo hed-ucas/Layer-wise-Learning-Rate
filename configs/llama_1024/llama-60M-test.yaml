@@ -1,0 +1,135 @@
+run_name: llama-60M
+seed: 6198
+dry_run: false
+model_type: llama
+dataset_path: /data/home/ALR/Fineweb/100BT/*.parquet
+eval_dataset_path: /data/home/ALR/Fineweb/eval_013_00008.parquet
+
+swanlab:
+  name: ${run_name}
+  project: olmo-llama-60M
+
+max_duration: 1ep
+stop_at: 800
+max_epochs: 100
+LLR_ratio: 0.2
+global_train_batch_size: 128
+device_train_microbatch_size: 16
+
+scheduler:
+  name: cosine_with_warmup
+  t_warmup: 80
+  alpha_f: 0.1
+  warmup_min_lr: 0
+
+llama_model:
+  bos_token_id: 0
+  eos_token_id: 1
+  hidden_act: silu
+  hidden_size: 768
+  intermediate_size: 1512
+  initializer_range: 0.02
+  max_sequence_length: 4096
+  model_type: llama
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: -1
+  rms_norm_eps: 1e-06
+  transformers_version: 4.28.1
+  use_cache: true
+  vocab_size: 32000
+  precision: amp_bf16
+
+ddp:
+  grad_sync_mode: batch
+  find_unused_params: false
+
+compile: null
+
+optimizer:
+  name: adamw
+  embed_name: embed
+  head_name: head
+  learning_rate: 6.0e-4
+  muon_lr: -1
+  embed_lr: -1
+  weight_decay: 0.1
+  eps: 1e-8
+  decay_norm_and_bias: true
+  decay_embeddings: true
+  betas:
+  - 0.9
+  - 0.95
+  metrics_log_interval: 10
+
+LLR:
+  use_modulewise_lr: True
+  alpha_positively_with_lr: True
+  grad_alpha_metric: grad
+  num_grad_steps: 0.1
+  grad_unbalancedlr_every: 0.5
+  assign_func: tb_linear_map
+  lr_min_ratio: 1
+  lr_max_ratio: 3
+  unbalancedlr_every: 40
+  linear_steps: 20
+  pl_fitting: median
+  remove_last_layer: False
+  remove_first_layer: False
+  batchnorm: True
+  filter_zeros: False
+  esd_metric_for_tb: alpha
+  xmin_pos: 2
+  batchnorm_type: name
+  log_LR_every: 100
+
+tokenizer:
+  identifier: tokenizers/allenai_gpt-neox-olmo-dolma-v1_5.json
+  truncate_direction: right
+
+save_folder: workspace/${run_name}  # doesn't matter since we'll upload to S3
+remote_save_folder:
+save_overwrite: True
+
+# Unsharded checkpoints (for ddp)
+save_interval_unsharded: 1000
+save_num_unsharded_checkpoints_to_keep: 1
+
+load_path: null
+
+precision: amp_bf16
+distributed_strategy: ddp
+
+gen1_gc_interval: 1
+
+max_grad_norm: 1.0
+max_grad_norm_ratio: null
+
+speed_monitor:
+  window_size: 20
+
+eval_interval: 100
+eval_subset_num_batches: -1
+device_eval_batch_size: ${device_train_microbatch_size}
+evaluators:
+  - label: all-small-ppl-validation
+    data:
+      num_workers: 0
+      drop_last: true
+      datasets:
+        fineweb-validation:
+          - /data/home/ALR/eval-fineweb-part-00039.npy
+
+data:
+  pad_direction: right
+  num_workers: 8
+  drop_last: true
+  pin_memory: true
+  prefetch_factor: 8
+  persistent_workers: true
+  timeout: 0
+  instance_filter:
+    repetition_max_period: 13
+    repetition_min_period: 1
+    repetition_max_count: 32
+  paths:
