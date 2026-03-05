@@ -7,6 +7,7 @@ LLR determines the Learning Rate parameter values of each layer in LLM training 
 <div align="center">
   <img src="./images/fig1.png" alt="Image 2" style="width: 800px; margin: 0 auto;">
   <img src="./images/fig2.png" alt="Image 2" style="width: 800px; margin: 0 auto;">
+  <img src="./images/fig3.png" alt="Image 2" style="width: 800px; margin: 0 auto;">
 </div>
 
 
@@ -67,10 +68,6 @@ We evaluate the pretrained LLaMa‑1B models, based on the checkpoints obtained 
 | `LLR` | **20.30** | **17.03** | **12.71** | **9.59** |
 
 The table above presents the validation perplexity of different model sizes using AdamW optimizers with a uniform LR across all layers set to match the maximum Layerwise LR (upper bound) determined by LLR. LLR consistently outperforms both the upper bound and lower bound of uniform LR scaling across different model sizes. These findings confirm that a uniform LR configuration is inherently suboptimal, whereas the proposed layer-wise LR strategy enables a more effective utilization of the capabilities of different optimizers.
-
-<div align="center">
-  <img src="./images/fig3.png" alt="Image 2" style="width: 900px; margin: 0 auto;">
-</div>
 
 ## Installation
 
