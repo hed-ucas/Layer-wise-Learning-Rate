@@ -35,16 +35,16 @@ Extensive experiments across architectures (from LLaMA to GPT-nano), optimizers 
 
 > **(Main result)** Comparison with LLR and all baselines on pre-training various sizes of LLaMa models on FineWeb dataset. Validation perplexity is reported.
 
-| Model Size | `Uniform` | `LARS` (You et al., 2017) | `LAMB` (You et al., 2019) | `Sharpness` (Wang et al., 2025) | `LLR` |
+| Model Size | `Uniform` | `LARS` | `LAMB` | `Sharpness` | `LLR` |
 |---|---|---|---|---|---|
 | 60M  | 21.94 | 52.52 | 23.53 | 23.28 | **20.30** |
 | 135M | 17.86 | 32.78 | 18.59 | 18.54 | **17.03** |
 | 350M | 12.96 | 19.04 | 14.56 | 14.91 | **12.71** |
 | 1B   | 9.77  | 11.81 | 10.68 | 9.77  | **9.59** |
 
-- [1] LARS: You et al., 2017 ([arxiv link](https://arxiv.org/pdf/1708.03888))
-- [2] LAMB: You et al., 2019 ([arxiv link](https://arxiv.org/pdf/1904.00962))
-- [3] Sharpness: Wang et al., 2025 ([arxiv link](https://arxiv.org/pdf/2502.19002))
+- [1] `LARS`: You et al., 2017 ([arxiv link](https://arxiv.org/pdf/1708.03888))
+- [2] `LAMB`: You et al., 2019 ([arxiv link](https://arxiv.org/pdf/1904.00962))
+- [3]  `Sharpness`: Wang et al., 2025 ([arxiv link](https://arxiv.org/pdf/2502.19002))
 
 > **(Zero-shot results of commonsense-reasoning tasks)** Zero-shot evaluation results on seven commonsense reasoning benchmarks using the LLaMa-1B model pretrained with different methods.
 
@@ -62,9 +62,9 @@ We evaluate the pretrained LLaMa‑1B models, based on the checkpoints obtained 
 
 | Model Size | 60M | 135M | 350M | 1B |
 |---|---|---|---|---|
-| LR (Upbound) | 0.005 | 0.005 | 0.005 | 0.0025 |
-| Uniform-Upbound | 68.28 | 70.81 | 56.96 | 30.56 |
-| LLR | **20.30** | **17.03** | **12.71** | **9.59** |
+| `LR (Upbound)` | 0.005 | 0.005 | 0.005 | 0.0025 |
+| `Uniform-Upbound` | 68.28 | 70.81 | 56.96 | 30.56 |
+| `LLR` | **20.30** | **17.03** | **12.71** | **9.59** |
 
 The table above presents the validation perplexity of different model sizes using AdamW optimizers with a uniform LR across all layers set to match the maximum Layerwise LR (upper bound) determined by LLR. LLR consistently outperforms both the upper bound and lower bound of uniform LR scaling across different model sizes. These findings confirm that a uniform LR configuration is inherently suboptimal, whereas the proposed layer-wise LR strategy enables a more effective utilization of the capabilities of different optimizers.
 
