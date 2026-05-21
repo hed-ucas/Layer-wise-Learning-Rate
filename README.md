@@ -23,7 +23,9 @@ By promoting more balanced training across different layers of Transformer model
   <img src="./images/gif/git_acc/zeroshot_adamw_mean_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
   <img src="./images/gif/git_acc/zeroshot_adamw_openbookqa_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
   <img src="./images/gif/git_acc/zeroshot_adamw_winogrande_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
-  <img src="./images/gif/git_acc/zeroshot_adamw_arc_challenge_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;"> \\
+  <img src="./images/gif/git_acc/zeroshot_adamw_arc_challenge_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;"> 
+
+  <br> <!-- 使用 HTML 的 br 标签进行换行 -->
   
   <img src="./images/gif/git_acc/zeroshot_adamw_arc_easy_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
   <img src="./images/gif/git_acc/zeroshot_adamw_boolq_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
