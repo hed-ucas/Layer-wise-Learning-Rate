@@ -15,6 +15,17 @@ LLR consistently outperforms Uniform at equivalent token counts and attains comp
   <img src="./images/fig3.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
 </div>
 
+
+By promoting more balanced training across different layers of Transformer models, LLR achieves improved generalization.
+
+<div align="center">
+  <img src="./images/gif/git_loss/loss_curve_350M-adamw_Sheet1.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_mean_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  
+</div>
+
+
+
 ## Table of contents
 
 * [Abstract](#abstract)
