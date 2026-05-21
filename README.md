@@ -21,6 +21,15 @@ By promoting more balanced training across different layers of Transformer model
 <div align="center">
   <img src="./images/gif/git_loss/loss_curve_350M-adamw_Sheet1.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
   <img src="./images/gif/git_acc/zeroshot_adamw_mean_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_openbookqa_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_winogrande_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_arc_challenge_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_arc_easy_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_boolq_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_hellaswag_offline_arrow_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_social_iqa_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/gif/git_acc/zeroshot_adamw_piqa_offline_arrow_acc_none.gif" alt="Image 2" style="width: 750px; margin: 0 auto;">
+  <img src="./images/zeroshot_legend.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
   
 </div>
 
