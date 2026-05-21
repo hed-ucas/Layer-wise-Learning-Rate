@@ -32,6 +32,9 @@ By promoting more balanced training across different layers of Transformer model
   <img src="./images/gif/git_acc/zeroshot_adamw_hellaswag_offline_arrow_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
   <img src="./images/gif/git_acc/zeroshot_adamw_social_iqa_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
   <img src="./images/gif/git_acc/zeroshot_adamw_piqa_offline_arrow_acc_none.gif" alt="Image 2" style="width: 130px; margin: 0 auto;">
+
+  <br> <!-- 使用 HTML 的 br 标签进行换行 -->
+  
   <img src="./images/zeroshot_legend.png" alt="Image 2" style="width: 200px; margin: 0 auto;">
   
 </div>
