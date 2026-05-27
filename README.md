@@ -65,7 +65,6 @@ Layers with weaker heavy-tailedness are assigned larger learning rates to accele
 By tailoring learning rates in this manner, LLR promotes balanced training across layers, leading to faster convergence and improved generalization. Extensive experiments across architectures, from LLaMA to GPT-nano, optimizers, including AdamW and Muon, and parameter scales, from 60M to 3B with up to 100B training tokens, demonstrate that LLR achieves up to a 1.5$\times$ training speedup and outperforms strong baselines. 
 In particular, LLR improves average zero-shot accuracy from 47.09\% to 49.02\% for 1B models and from 48.58\% to 50.61\% for 3B models. 
 A key advantage of LLR is its low tuning overhead: it transfers nearly optimal learning-rate settings directly from the uniform-learning-rate baseline. 
-Code is available at https://github.com/hed-ucas/Layer-wise-Learning-Rate.
 
 ## Checkpoints
 
