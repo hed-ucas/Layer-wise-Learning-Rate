@@ -11,13 +11,6 @@ LLR determines the Learning Rate parameter values of each layer in LLM training 
   <img src="./images/fig1.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
 </div>
 
-LLR consistently outperforms Uniform at equivalent token counts and attains comparable performance with approximately 1.5× fewer tokens, highlighting its effectiveness in accelerating convergence.
-
-<div align="center">
-  <img src="./images/fig3.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
-</div>
-
-
 By promoting more balanced training across different layers of Transformer models, LLR achieves improved generalization.
 
 <div align="center">
@@ -110,6 +103,12 @@ We evaluate the pretrained LLaMa‑1B models, based on the checkpoints obtained 
 | `LLR` | **20.30** | **17.03** | **12.71** | **9.59** |
 
 The table above presents the validation perplexity of different model sizes using AdamW optimizers with a uniform LR across all layers set to match the maximum Layerwise LR (upper bound) determined by LLR. LLR consistently outperforms both the upper bound and lower bound of uniform LR scaling across different model sizes. These findings confirm that a uniform LR configuration is inherently suboptimal, whereas the proposed layer-wise LR strategy enables a more effective utilization of the capabilities of different optimizers.
+
+LLR consistently outperforms Uniform at equivalent token counts and attains comparable performance with approximately 1.5× fewer tokens, highlighting its effectiveness in accelerating convergence.
+
+<div align="center">
+  <img src="./images/fig3.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
+</div>
 
 ## Installation
 
