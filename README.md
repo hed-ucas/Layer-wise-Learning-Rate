@@ -1,5 +1,9 @@
 # One LR Doesn’t Fit All: Heavy-Tail Guided Layerwise Learning Rates for LLMs
 
+| [📄 Arxiv](https://arxiv.org/pdf/2605.22297) | [📝 Blog](https://x.com/hed_ucas/status/2059596623509094738?s=20) |
+|---|---|
+
+
 This repo contains the pre-release version of LLR.  
 
 LLR determines the Learning Rate parameter values of each layer in LLM training through the spectral characteristics of the ESD distribution and makes dynamic adjustments during the training process, thereby improving the training performance of the model.
