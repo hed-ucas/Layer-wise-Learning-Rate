@@ -1,6 +1,13 @@
 # One LR Doesn’t Fit All: Heavy-Tail Guided Layerwise Learning Rates for LLMs
 
- [📄 Arxiv](https://arxiv.org/pdf/2605.22297) | [📝 Blog](https://x.com/hed_ucas/status/2059596623509094738?s=20) 
+<p align="center">
+  <a href="https://arxiv.org/pdf/2605.22297">
+    <img src="https://img.shields.io/badge/Arxiv-Paper-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="Arxiv">
+  </a>
+  <a href="https://x.com/hed_ucas/status/2059596623509094738?s=20">
+    <img src="https://img.shields.io/badge/Blog-X-black?style=for-the-badge&logo=x&logoColor=white" alt="Blog">
+  </a>
+</p>
 
 
 This repo contains the pre-release version of LLR, which has been accepted by **ICML 2026** and the **ICLR 2026 DeLTa Workshop**. 
