@@ -57,8 +57,15 @@ We propose LLR, a spectral-based adaptive scheme that tailors learning rates per
 
 ## Abstract
 
-Learning rate configuration is a fundamental aspect of modern deep learning. The prevailing practice of applying a uniform learning rate across all layers overlooks the structural heterogeneity of Transformers, potentially limiting their effectiveness as the backbone of Large Language Models (LLMs). In this paper, we introduce Layerwise Learning Rate (LLR), an adaptive scheme that assigns distinct learning rates to individual Transformer layers. Our method is grounded in Heavy-Tailed Self-Regularization (HT-SR) theory, which characterizes the empirical spectral density (ESD) of weight correlation matrices to quantify heavy-tailedness. Layers with weaker heavy-tailedness are assigned larger learning rates to accelerate their training, while layers with stronger heavy-tailedness receive smaller learning rates. By tailoring learning rates in this manner, LLR promotes balanced training across layers, leading to faster convergence and improved generalization.
-Extensive experiments across architectures (from LLaMA to GPT-nano), optimizers (AdamW and Muon), and parameter scales (60M–1B) demonstrate that LLR achieves up to 1.5× training speedup and outperforms baselines, notably raising average zero-shot accuracy from 47.09% to 49.02%. A key advantage of LLR is its low tuning overhead: it transfers nearly optimal LR settings directly from the uniform baseline.
+Learning rate configuration is a fundamental aspect of modern deep learning. 
+The prevailing practice of applying a uniform learning rate across all layers overlooks the structural heterogeneity of Transformers, potentially limiting their effectiveness as the backbone of Large Language Models (LLMs). 
+In this paper, we introduce Layerwise Learning Rate (LLR), an adaptive scheme that assigns distinct learning rates to individual Transformer layers. 
+Our method is grounded in Heavy-Tailed Self-Regularization (HT-SR) theory, which characterizes the empirical spectral density (ESD) of weight correlation matrices to quantify heavy-tailedness. 
+Layers with weaker heavy-tailedness are assigned larger learning rates to accelerate their training, while layers with stronger heavy-tailedness receive smaller learning rates. 
+By tailoring learning rates in this manner, LLR promotes balanced training across layers, leading to faster convergence and improved generalization. Extensive experiments across architectures, from LLaMA to GPT-nano, optimizers, including AdamW and Muon, and parameter scales, from 60M to 3B with up to 100B training tokens, demonstrate that LLR achieves up to a 1.5$\times$ training speedup and outperforms strong baselines. 
+In particular, LLR improves average zero-shot accuracy from 47.09\% to 49.02\% for 1B models and from 48.58\% to 50.61\% for 3B models. 
+A key advantage of LLR is its low tuning overhead: it transfers nearly optimal learning-rate settings directly from the uniform-learning-rate baseline. 
+Code is available at https://github.com/hed-ucas/Layer-wise-Learning-Rate.
 
 ## Checkpoints
 
